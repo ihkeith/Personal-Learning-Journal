@@ -22,7 +22,7 @@ class User(UserMixin, Model):
                     email=email,
                     password=generate_password_hash(password)
                 )
-        else IntegrityError:
+        except IntegrityError:
             raise ValueError("User already exists!")
 
 class Entry(Model):
@@ -31,3 +31,24 @@ class Entry(Model):
     time_spent = IntegerField()
     learned = TextField()
     resources = CharField()
+    user = ForeignKeyField(
+        User,
+        related_name='entries'
+    )
+
+    class Meta:
+        database = DATABASE
+
+
+class Tag(Model):
+    tag = CharField(max=100)
+    post = ForeignKeyField(
+        Post,
+        related_name='tags'
+    )
+
+
+def initialize():
+    DATABASE.connect()
+    DATABASE.create_tables([User, Entry, Tag], safe = True)
+    DATABASE.close()
