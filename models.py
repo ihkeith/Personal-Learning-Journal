@@ -8,7 +8,7 @@ DATABASE = SqliteDatabase("journal.dbs")
 
 class User(UserMixin, Model):
     username = CharField(unique=True)
-    password = CharField(max=100)
+    password = CharField(max_length=100)
 
     class Meta:
         database = DATABASE
@@ -41,9 +41,9 @@ class Entry(Model):
 
 
 class Tag(Model):
-    tag = CharField(max=100)
+    tag = CharField(max_length==100)
     post = ForeignKeyField(
-        Post,
+        Entry,
         related_name='tags'
     )
 

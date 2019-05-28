@@ -23,7 +23,8 @@ login_manager.login_view = 'login'
 # the Listing route.
 @app.route('/')
 def index():
-    pass
+    entries = models.Entry.select().limit(20)
+    return render_template('index.html', entryies=entries)
 
 
 # /entries - Also will act as the Listing route just like /
