@@ -4,10 +4,10 @@ from flask_bcrypt import generate_password_hash
 from flask_login import UserMixin
 from peewee import *
 
-DATABASE = SqliteDatabase("journal.dbs")
+DATABASE = SqliteDatabase("learning_journal.db")
 
 class User(UserMixin, Model):
-    username = CharField(unique=True)
+    email = CharField(unique=True)
     password = CharField(max_length=100)
 
     class Meta:
@@ -30,7 +30,7 @@ class Entry(Model):
     date = DateTimeField(default=datetime.datetime.now)
     time_spent = IntegerField()
     learned = TextField()
-    resources = CharField()
+    resources = TextField()
     user = ForeignKeyField(
         User,
         related_name='entries'
@@ -41,11 +41,14 @@ class Entry(Model):
 
 
 class Tag(Model):
-    tag = CharField(max_length==100)
+    tag = CharField(max_length=100)
     post = ForeignKeyField(
         Entry,
         related_name='tags'
     )
+
+    class Meta:
+        database = DATABASE
 
 
 def initialize():

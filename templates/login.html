@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+{% from 'macros.html' import render_field %}
+
+{% block content %}
+<form method='POST' action=''>
+    <div>
+        <div>{{ form.hidden_tag() }}</div>
+        <div>{{ render_field(form.email) }}</div>
+        <div>{{ render_field(form.password) }}</div>
+    </div>
+    <div>
+        <input type="submit" class="button-primary" value="Login">
+    </div>
+</form>
+{% endblock %}
