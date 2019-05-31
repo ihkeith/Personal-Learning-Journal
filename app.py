@@ -36,8 +36,8 @@ def new():
     if form.validate_on_submit():
         flash("New entry added! Keep Learning!")
         models.Entry.create(
-            title = form.title.data,
-            date = form.date.data,
+            title=form.title.data,
+            date=form.date.data,
             time_spent=form.time_spent.data,
             learned=form.learned.data,
             resources=form.resources.data
@@ -56,9 +56,9 @@ def edit(entry_id):
         flash("Entry edited!")
         entry.title = form.title.data
         entry.date = form.date.data
-        entry.time_spent=form.time_spent.data
-        entry.learned=form.learned.data
-        entry.resources=form.resources.data
+        entry.time_spent = form.time_spent.data
+        entry.learned = form.learned.data
+        entry.resources = form.resources.data
         entry.save()
         return redirect(url_for('index'))
     return render_template('edit.html', form=form)
