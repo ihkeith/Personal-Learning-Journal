@@ -10,7 +10,7 @@ See `requirements.txt` for more details
 
 - Python3
 - Flask: `pip install flask`
-- Flask-WTF: `pip install flask_wtf'
+- Flask-WTF: `pip install flask_wtf`
 - Peewee: `pip install peewee`
   
 ## Usage
