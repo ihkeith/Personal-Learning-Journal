@@ -10,6 +10,7 @@ HOST = '0.0.0.0'
 app = Flask(__name__)
 app.secret_key = 'kjnarnENE&@*#HFNW9ejnfdgjh98u254ih5y&#($&@!jjdn22811839490pszzZfd'
 
+
 @app.route("/")
 def index():
     entries = models.Entry.select().limit(10)
