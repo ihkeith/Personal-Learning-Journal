@@ -13,13 +13,13 @@ app.secret_key = 'kjnarnENE&@*#HFNW9ejnfdgjh98u254ih5y&#($&@!jjdn22811839490pszz
 
 @app.route("/")
 def index():
-    entries = models.Entry.select().limit(10)
+    entries = models.Entry.select().order_by(models.Entry.date.desc()).limit(10)
     return render_template('index.html', entries=entries)
 
 
 @app.route('/entries')
 def entries():
-    entries = models.Entry.select().limit(10)
+    entries = models.Entry.select().order_by(models.Entry.date.desc()).limit(10)
     return render_template('index.html', entries=entries)
 
 
