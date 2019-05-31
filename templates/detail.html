@@ -7,15 +7,15 @@
         <link href="https://fonts.googleapis.com/css?family=Cousine:400" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Work+Sans:600" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/site.css">
+        <link rel="stylesheet" href="/static/css/normalize.css">
+        <link rel="stylesheet" href="/static/css/site.css">
     </head>
     <body>
         <header>
             <div class="container">
                 <div class="site-header">
-                    <a class="logo" href="index.html"><i class="material-icons">library_books</i></a>
-                    <a class="button icon-right" href="new.html"><span>New Entry</span> <i class="material-icons">add</i></a>
+                    <a class="logo" href="{{ url_for('index') }}"><i class="material-icons">library_books</i></a>
+                    <a class="button icon-right" href="{{ url_for('new') }}"><span>New Entry</span> <i class="material-icons">add</i></a>
                 </div>
             </div>
         </header>
@@ -23,7 +23,27 @@
             <div class="container">
                 <div class="entry-list single">
                     <article>
-                        <h1>The best day I’ve ever had</h1>
+                        <h1>{{ entry.title }}</h1>
+                        <time data-time="{{ entry.date }}" class="distime" datetime="{{ entry.date.strftime('%Y-%m-%d') }}">{{ entry.date.strftime('%Y-%m-%d') }}</time>
+                        <div class=entry>
+                            <h3>Time Spent: </h3>
+                            <p>{{ entry.time_spent }} hours</p>
+                        </div>
+                        <div class=entry>
+                            <h3>What I Learned: </h3>
+                            {% for line in entry.learned.split("\n") %}
+                            <p>{{ line }}</p>
+                            {% endfor %}
+                        </div>
+                        <div class=entry>
+                            <h3>Resources to Remember: </h3>
+                            <ul>
+                                {% for line in entry.resources.split("\n") %}
+                                <li>{{ line }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!-- <h1>The best day I’ve ever had</h1>
                         <time datetime="2016-01-31">January 31, 2016</time>
                         <div class="entry">
                             <h3>Time Spent: </h3>
@@ -41,13 +61,16 @@
                                 <li><a href="">Cras accumsan cursus ante, non dapibus tempor</a></li>
                                 <li>Nunc ut rhoncus felis, vel tincidunt neque</li>
                                 <li><a href="">Ipsum dolor sit amet</a></li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </article>
                 </div>
             </div>
             <div class="edit">
-                <p><a href="edit.html">Edit Entry</a></p>
+                <p><a href="{{ url_for('edit', entry_id=entry.id) }}">Edit Entry</a></p>
+            </div>
+            <div>
+                <p><a href="{{ url_for('delete', entry_id=entry.id) }}">Delete Entry</a></p>
             </div>
         </section>
         <footer>
