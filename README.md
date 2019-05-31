@@ -15,6 +15,7 @@ See `requirements.txt` for more details
   
 ## Usage
 
--clone the repo to your computer
+- clone the repo to your computer
+- NOTE: it is recommended to create a virtual environment and install dependencies via requirements.txt!
 - install dependencies
 - from the root of the cloned repo, run `python3 app.py`
