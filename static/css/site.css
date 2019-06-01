@@ -227,7 +227,19 @@ input[type=submit] {
 
 
 
-
+.messages {
+    clear:both;
+    margin-bottom: 1rem;
+}
+.message {
+    background: #33C3F0;
+    border: 1px solid;
+    border-radius: 4px;
+    color: #fff;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    width: 75%;
+}
 
 
 

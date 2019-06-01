@@ -8,23 +8,28 @@ PORT = 8000
 HOST = '0.0.0.0'
 
 app = Flask(__name__)
-app.secret_key = 'kjnarnENE&@*#HFNW9ejnfdgjh98u254ih5y&#($&@!jjdn22811839490pszzZfd'
+app.secret_key = 'kjnarnEE&@*#HFNW9ejndgju254ih5y&#($&@!jjdn228118490pszzZfd'
 
 
 @app.route("/")
 def index():
-    entries = models.Entry.select().order_by(models.Entry.date.desc()).limit(10)
+    """View all entries"""
+    entries = models.Entry.select().order_by(
+            models.Entry.date.desc()).limit(10)
     return render_template('index.html', entries=entries)
 
 
 @app.route('/entries')
 def entries():
-    entries = models.Entry.select().order_by(models.Entry.date.desc()).limit(10)
+    """View all entries"""
+    entries = models.Entry.select().order_by(
+            models.Entry.date.desc()).limit(10)
     return render_template('index.html', entries=entries)
 
 
 @app.route("/entries/<int:entry_id>")
 def detail(entry_id):
+    """View entry details"""
     entry = models.Entry.get(models.Entry.id**entry_id)
     return render_template('detail.html', entry=entry)
 
@@ -48,6 +53,7 @@ def new():
 
 @app.route('/entries/<int:entry_id>/edit', methods=['GET', 'POST'])
 def edit(entry_id):
+    """Edit an entry"""
     entry = models.Entry.get(models.Entry.id**entry_id)
     # https://dzone.com/articles/flask-101-adding-editing-and-displaying-data
     # this link told me how to prepopluate the form
@@ -66,6 +72,7 @@ def edit(entry_id):
 
 @app.route('/entries/<int:entry_id>/delete', methods=['GET', 'POST'])
 def delete(entry_id):
+    """Delete an entry"""
     entry = models.Entry.get(models.Entry.id**entry_id)
     entry.delete_instance()
     flash("Entry successfully deleted.")
